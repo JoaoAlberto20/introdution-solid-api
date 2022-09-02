@@ -12,10 +12,11 @@ class CreateUserUseCase {
   execute({ email, name }: IRequest): User {
     const userExist = this.usersRepository.findByEmail(email);
 
-    if (userExist) throw new Error("User not exist");
+    if (userExist) {
+      throw new Error("User not exist");
+    }
 
     const user = this.usersRepository.create({ name, email });
-
     return user;
   }
 }
